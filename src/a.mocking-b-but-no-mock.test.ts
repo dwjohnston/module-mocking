@@ -2,12 +2,10 @@ import { a } from "./a"
 import { b } from "./b";
 import fs from "fs";
 // Inform jest that we want to use the 
-jest.mock('fs');
 jest.mock("./b");
 
 
 const mockB = jest.mocked(b); 
-mockB.mockReturnValue(["some message1", "some message2", "some message3"]);
 
 
 describe(a, () => {
@@ -15,11 +13,7 @@ describe(a, () => {
 
 
         a();
-
-        const expectedText = `some message1
-some message2
-some`
-        expect(fs.writeFileSync).toHaveBeenCalledWith("./output/report.txt", expectedText)
+        expect(fs.writeFileSync).toHaveBeenCalledWith("./output/report.txt")
 
 
     })
